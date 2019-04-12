@@ -28,32 +28,67 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:gravity="center">
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:id="@+id/wait_on_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/status_bg" />
+                        <ImageView
+                            android:layout_width="@dimen/ready_imgae_size"
+                            android:layout_height="@dimen/ready_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/status_bg" />
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/standby" />
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/standby" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/dot01" />
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="@dimen/ready_imgae_size"
+                            android:layout_height="@dimen/ready_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/dot01" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/ready_imgae_size"
+                            android:layout_height="@dimen/ready_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/status_bg" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textSize="@dimen/ready_text_size"
+                            android:text="@string/ready_label"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/ready_imgae_size"
+                            android:layout_height="@dimen/ready_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/dot01" />
+                    </RelativeLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -315,14 +350,14 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/pump_imgae_size"
+                        android:layout_height="@dimen/pump_imgae_size"
                         android:layout_centerInParent="true"
                         android:src="@mipmap/dial" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/pump_imgae_size"
+                        android:layout_height="@dimen/pump_imgae_size"
                         android:layout_centerInParent="true"
                         android:src="@mipmap/pointer" />
                 </RelativeLayout>
@@ -332,7 +367,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="车罐压力" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:text="@string/pump_pressure" />
             </LinearLayout>
 
             <LinearLayout
@@ -349,8 +385,42 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/pump_imgae_size"
+                        android:layout_height="@dimen/pump_imgae_size"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/dial" />
+
+                    <ImageView
+                        android:layout_width="@dimen/pump_imgae_size"
+                        android:layout_height="@dimen/pump_imgae_size"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/pointer" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textSize="@dimen/bottom_text_size"
+                    android:text="@string/port_pressure" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/pump_imgae_size"
+                        android:layout_height="@dimen/pump_imgae_size"
                         android:src="@mipmap/tank" />
                 </RelativeLayout>
 
@@ -359,7 +429,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="车罐液位" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:text="@string/port_level" />
             </LinearLayout>
 
             <LinearLayout
@@ -377,18 +448,19 @@
 
                     <ImageView
                         android:id="@+id/fire_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/fire" />
+                        android:layout_width="@dimen/pump_imgae_size"
+                        android:layout_height="@dimen/pump_imgae_size"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/circle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@id/fire_iv"
-                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"
                         android:text="10%"
-                        android:textColor="@color/seaBlue"
-                        android:textSize="36sp"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -397,7 +469,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="燃气浓度" />
+                    android:textSize="@dimen/bottom_text_size"
+                    android:text="@string/gas_level" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

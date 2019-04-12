@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pump_imgae_size">60dp</dimen>
+    <dimen name="bottom_text_size">20sp</dimen>
+    <dimen name="ready_imgae_size">120dp</dimen>
+    <dimen name="ready_text_size">40sp</dimen>
+</resources>

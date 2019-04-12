@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LPGMonitor</string>
+    <string name="pump_pressure">泵后压力</string>
+    <string name="port_pressure">车罐压力</string>
+    <string name="port_level">车罐液位</string>
+    <string name="gas_level">燃气浓度</string>
+    <string name="ready_label">准备</string>
 </resources>
