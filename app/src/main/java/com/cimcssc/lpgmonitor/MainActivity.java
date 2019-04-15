@@ -218,8 +218,6 @@ public class MainActivity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 Log.d("receivedata","receive data is: " + sb.toString());
-                                //TextView9.setText(sb.toString());
-
                                 //卸液
                                 if(receiveData.equals("2019")){
                                     action_Tv1.setText(getResources().getString(R.string.unloading_label));
