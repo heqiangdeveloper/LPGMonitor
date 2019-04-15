@@ -15,7 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.serial.SerialPort;
-import com.utils.CRC16;
+import com.utils.Config;
+import com.utils.SendBytes;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,8 +39,8 @@ public class MainActivity extends BaseActivity {
     TextView TextView9;
 
     //byte类型最大只能存放127（对应ox7F）
-    private byte[] bytes =
-            new byte[]{0x3C,0x30,0x1C,0x07,0x02,0x05,0x3E,0x7F};
+    //private byte[] bytes =
+    //        new byte[]{0x3C,0x30,0x1C,0x07,0x02,0x05,0x3E,0x7F};
     private SerialPort serialttyS1;
     private InputStream ttyS1InputStream;
     private OutputStream ttyS1OutputStream;
@@ -66,8 +67,10 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.action_tv1:
-                //发送数据
-                sendData();
+                //发送数据 0x01 1（十进制）
+                //0x02 2（十进制）
+                //0x03 3（十进制）
+                sendData(3);//十进制
 
                 //卸液准备
                 if(action_Tv1.getText().equals(getResources().getString(R.string.unloading_ready_label))){
@@ -157,7 +160,7 @@ public class MainActivity extends BaseActivity {
     private void init_serial(){
         try {
             Log.d("mylog","send a  data...");
-            serialttyS1 = new SerialPort(new File("/dev/ttyS2"),115200,0);
+            serialttyS1 = new SerialPort(new File(Config.pathname),Config.baudrate,0);
             ttyS1InputStream = serialttyS1.getInputStream();
             ttyS1OutputStream = serialttyS1.getOutputStream();
         } catch (IOException e) {
@@ -180,25 +183,12 @@ public class MainActivity extends BaseActivity {
         }
     }
     //发送数据
-    public void sendData(){
+    public void sendData(int flag){
         /* 串口发送字节 */
         if(ttyS1OutputStream != null){
-            byte part1 = 0x3C;
-            byte part2 = 0x30;
-            byte part3 = 0x01;
-            byte part4 = 0x07;
-            byte part5 = 0x3C;
-            byte[] bytes = new byte[]{part1,part2,part3,part4,part5};
-
-            int[] crc16 = CRC16.getCrc16(bytes);//10进制
-            int c1 = crc16[0];//42  0x2a
-            int c2 = crc16[1];//36
-
-            byte part8 = 0x3E;
-            byte[] bytes2 = new byte[]{part1,part2,part3,part4,part5,(byte)c1,(byte)c2,part8};
-
+            byte[] sendCommandBytes = SendBytes.getSendBytes(flag);
             try{
-                ttyS1OutputStream.write(bytes2);
+                ttyS1OutputStream.write(sendCommandBytes);
             }catch (Exception e){
 
             }
