@@ -9,6 +9,7 @@ public class SendBytes {
     private static int[] crc16;
     private static int c1;
     private static int c2;
+    //flag是十进制
     public static byte[] getSendBytes(int flag){
         Config.FLAG_SEND = flag;
         bytes = new byte[]{

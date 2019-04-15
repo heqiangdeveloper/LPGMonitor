@@ -70,11 +70,13 @@ public class MainActivity extends BaseActivity {
                 //发送数据 0x01 1（十进制）
                 //0x02 2（十进制）
                 //0x03 3（十进制）
-                sendData(3);//十进制
 
                 //卸液准备
                 if(action_Tv1.getText().equals(getResources().getString(R.string.unloading_ready_label))){
-                        action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                        //action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                    //发送  卸液准备
+                    sendData(1);//十进制
+
                 }
                 //卸液
                 else if(action_Tv1.getText().equals(getResources().getString(R.string.unloading_label))){
@@ -202,26 +204,48 @@ public class MainActivity extends BaseActivity {
                 Looper.prepare();
                 int size;
                 byte[] buffer = new byte[1024];
+                String s = "";
                 try{
                     while (ttyS1InputStream != null && (size = ttyS1InputStream.read(buffer)) > 0) {
-                        receiveData = new String(buffer,0,size);
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Log.d("receivedata","receive data is: " + sb.toString());
-                                //卸液
-                                if(receiveData.equals("2019")){
-                                    action_Tv1.setText(getResources().getString(R.string.unloading_label));
-                                }
-                                //卸液结束
-                                else if(receiveData.equals("2020")){
-                                    action_Tv1.setVisibility(View.VISIBLE);
-                                    action_Tv2.setVisibility(View.VISIBLE);
-                                    action_Tv2.setText(getResources().getString(R.string.unloading_end_label));
-                                    action_Tv1.setText(getResources().getString(R.string.wait_on_label));
-                                }
-                            }
-                        });
+                        sb.append(new String(buffer,0,size));
 
+                        s = sb.toString().trim();
+                        if(s.startsWith("3C") && s.endsWith("3E")){
+                            receiveData = sb.toString().trim();
+                            sb = new StringBuffer();
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Log.d("receivedata","receive data is: " + receiveData);
+
+                                    String[] strs = receiveData.split(" ");
+
+                                    Config.FRAME_HEADER_FEEDBACK = Integer.parseInt(strs[0],16);
+                                    Config.COMMAND_WORD_FEEDBACK = Integer.parseInt(strs[1],16);
+                                    Config.DATA_LENGTH_FEEDBACK = Integer.parseInt(strs[2],16);
+                                    Config.PUMP_FRONT_FEEDBACK = Integer.parseInt(strs[3],16);
+                                    Config.PUMP_BEHIND_FEEDBACK = Integer.parseInt(strs[4],16);
+                                    Config.PUMP_BEHIND_FEEDBACK = Integer.parseInt(strs[5],16);
+                                    Config.LEVEL_FEEDBACK = Integer.parseInt(strs[0],16);
+
+
+                                    byte[] bytes = new byte[]{
+
+
+                                    };
+                                    //卸液
+                                    if(receiveData.equals("2019")){
+                                        action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                                    }
+                                    //卸液结束
+                                    else if(receiveData.equals("2020")){
+                                        action_Tv1.setVisibility(View.VISIBLE);
+                                        action_Tv2.setVisibility(View.VISIBLE);
+                                        action_Tv2.setText(getResources().getString(R.string.unloading_end_label));
+                                        action_Tv1.setText(getResources().getString(R.string.wait_on_label));
+                                    }
+                                }
+                            });
+                        }
                     }
                 }catch (Exception e){
 
