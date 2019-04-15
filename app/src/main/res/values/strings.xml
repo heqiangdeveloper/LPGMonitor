@@ -5,4 +5,11 @@
     <string name="port_level">车罐液位</string>
     <string name="gas_level">燃气浓度</string>
     <string name="ready_label">准备</string>
+    <string name="ready_dialog_title">是否进入卸液准备模式？\n请输入确认密码，否则请退出！</string>
+    <string name="wait_on_dialog_title">是否进入待机模式？\n请输入确认密码，否则请退出！</string>
+    <string name="login_label">登入</string>
+    <string name="unloading_ready_label">卸液\n准备</string>
+    <string name="unloading_label">卸液</string>
+    <string name="unloading_end_label">卸液\n结束</string>
+    <string name="wait_on_label">待机</string>
 </resources>

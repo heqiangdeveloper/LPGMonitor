@@ -4,4 +4,8 @@
     <dimen name="bottom_text_size">20sp</dimen>
     <dimen name="ready_imgae_size">120dp</dimen>
     <dimen name="ready_text_size">40sp</dimen>
+    <dimen name="password_edittext_textsize">30sp</dimen>
+    <dimen name="login_button_textsize">30sp</dimen>
+    <dimen name="ready_dialog_imageview_size">60dp</dimen>
+    <dimen name="ready_dialog_item_margin_top">20dp</dimen>
 </resources>

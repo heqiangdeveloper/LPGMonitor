@@ -1,12 +1,18 @@
 package com.cimcssc.lpgmonitor;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.serial.SerialPort;
 import com.utils.CRC16;
@@ -16,14 +22,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * @author october
  */
 public class MainActivity extends BaseActivity {
-    RelativeLayout wait_on_Rl;
-
-    private ImageView imageView;
-    private TextView TextView9;
+    @BindView(R.id.action_tv1)
+    TextView action_Tv1;
+    @BindView(R.id.action_tv2)
+    TextView action_Tv2;
+    @BindView(R.id.textView9)
+    TextView TextView9;
 
     //byte类型最大只能存放127（对应ox7F）
     private byte[] bytes =
@@ -34,20 +46,15 @@ public class MainActivity extends BaseActivity {
     String readDatas = null;
     StringBuffer sb = new StringBuffer();
 
+    private Context mContext = MainActivity.this;
+    private String receiveData = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        wait_on_Rl = (RelativeLayout) findViewById(R.id.wait_on_rl);
-        TextView9 = (TextView) findViewById(R.id.textView9);
-        wait_on_Rl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //发送数据
-                sendData();
-            }
-        });
+        ButterKnife.bind(this);
+
         //初始化串口
         init_serial();
 
@@ -55,6 +62,97 @@ public class MainActivity extends BaseActivity {
         receiveData();
     }
 
+    @OnClick({R.id.action_tv1,R.id.action_tv2})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.action_tv1:
+                //发送数据
+                sendData();
+
+                //卸液准备
+                if(action_Tv1.getText().equals(getResources().getString(R.string.unloading_ready_label))){
+                        action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                }
+                //卸液
+                else if(action_Tv1.getText().equals(getResources().getString(R.string.unloading_label))){
+
+                }
+                //卸液结束
+                else if(action_Tv2.getText().equals(getResources().getString(R.string.ready_label))){
+
+                }
+                //故障
+                else if(action_Tv2.getText().equals(getResources().getString(R.string.ready_label))){
+
+                }
+                break;
+            case R.id.action_tv2:
+                String title = "";
+                //准备
+                if(action_Tv2.getText().equals(getResources().getString(R.string.ready_label))){
+                    title = getResources().getString(R.string.ready_dialog_title);
+                }
+                //待机
+                else if(action_Tv2.getText().equals(getResources().getString(R.string.wait_on_label))){
+                    title = getResources().getString(R.string.wait_on_dialog_title);
+                }
+
+                LayoutInflater inflater = LayoutInflater.from(mContext);
+                View view1 = inflater.inflate(R.layout.ready_dailog_content,null);
+                Button login_Bt = view1.findViewById(R.id.login_bt);
+                ImageView back_Iv = (ImageView) view1.findViewById(R.id.back_iv);
+                ImageView exit_Iv = (ImageView) view1.findViewById(R.id.exit_iv);
+                TextView title_Tv = (TextView) view1.findViewById(R.id.title_tv);
+                title_Tv.setText(title);
+                final EditText password_Et = (EditText) view1.findViewById(R.id.password_et);
+                final Dialog dialog = new AlertDialog.Builder(mContext)
+                        //.setTitle("提示")
+                        .setView(view1)
+                        //.setMessage(mContext.getResources().getString(R.string
+                        //.add_oil_dialog_title))
+                        .setCancelable(false)
+                        .create();
+                dialog.show();
+
+                login_Bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String password = password_Et.getText().toString().trim();
+                        if(password.equals("")){
+                            Toast.makeText(mContext,"请输入密码！",Toast.LENGTH_SHORT).show();
+                        }else if(password.equals("1234")){
+                            dialog.dismiss();
+                            Toast.makeText(mContext,"登入成功！",Toast.LENGTH_SHORT).show();
+                            if(action_Tv2.getText().equals(getResources().getString(R.string.ready_label))){
+                                action_Tv2.setVisibility(View.GONE);
+                                action_Tv1.setText(getResources().getString(R.string.unloading_ready_label));
+                            }else{
+                                action_Tv1.setVisibility(View.VISIBLE);
+                                action_Tv2.setVisibility(View.VISIBLE);
+                                action_Tv1.setText(getResources().getString(R.string.wait_on_label));
+                                action_Tv1.setText(getResources().getString(R.string.ready_label));
+                            }
+                        }else{
+                            password_Et.setText("");
+                            Toast.makeText(mContext,"密码错误，请重新输入！",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                back_Iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                exit_Iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                break;
+        }
+    }
     /* 打开串口 */
     private void init_serial(){
         try {
@@ -116,12 +214,26 @@ public class MainActivity extends BaseActivity {
                 byte[] buffer = new byte[1024];
                 try{
                     while (ttyS1InputStream != null && (size = ttyS1InputStream.read(buffer)) > 0) {
-                        sb.append(new String(buffer,0,size));
+                        receiveData = new String(buffer,0,size);
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                TextView9.setText(sb.toString());
+                                Log.d("receivedata","receive data is: " + sb.toString());
+                                //TextView9.setText(sb.toString());
+
+                                //卸液
+                                if(receiveData.equals("2019")){
+                                    action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                                }
+                                //卸液结束
+                                else if(receiveData.equals("2020")){
+                                    action_Tv1.setVisibility(View.VISIBLE);
+                                    action_Tv2.setVisibility(View.VISIBLE);
+                                    action_Tv2.setText(getResources().getString(R.string.unloading_end_label));
+                                    action_Tv1.setText(getResources().getString(R.string.wait_on_label));
+                                }
                             }
                         });
+
                     }
                 }catch (Exception e){
 
