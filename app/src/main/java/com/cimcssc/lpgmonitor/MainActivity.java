@@ -177,8 +177,8 @@ public class MainActivity extends BaseActivity {
                 ttyS1InputStream.close();
             }
 
-            if(ttyS1InputStream != null){
-                ttyS1InputStream.close();
+            if(ttyS1OutputStream != null){
+                ttyS1OutputStream.close();
             }
         }catch (Exception e){
 
@@ -229,7 +229,6 @@ public class MainActivity extends BaseActivity {
 
 
                                     byte[] bytes = new byte[]{
-
 
                                     };
                                     //卸液

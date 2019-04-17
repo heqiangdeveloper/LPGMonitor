@@ -12,4 +12,6 @@
     <string name="unloading_label">卸液</string>
     <string name="unloading_end_label">卸液\n结束</string>
     <string name="wait_on_label">待机</string>
+    <string name="login_user_hint">请输入账号</string>
+    <string name="login_password_hint">请输入密码</string>
 </resources>

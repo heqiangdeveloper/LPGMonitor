@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#0C222F</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="background">#132B37</color>
     <color name="lightBg">#153240</color>
     <color name="lightGreen">#31C86D</color>
@@ -13,5 +14,6 @@
     <color name="pink">#FCA5D9</color>
     <color name="lightBrown">#EBBEA2</color>
     <color name="dividerBg">#344F5A</color>
-    <color name="grey">#F2F2F2</color>
+    <color name="grey">#7C7C7C</color>
+    <color name="blue">#0000ff</color>
 </resources>
