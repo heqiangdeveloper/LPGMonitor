@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <include layout="@layout/title_layout"/>
+
+    <LinearLayout
+        android:layout_below="@id/title_rl"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/setting_margin">
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/stop_flow"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+
+            <EditText
+                android:id="@+id/stop_flow_et"
+                android:layout_width="@dimen/data"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/setting_text_size"
+                android:text="@string/rate"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginLeft="50dp"/>
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/stop_flow_unit"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/setting_margin">
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/stop_pump_pressure"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+
+            <EditText
+                android:id="@+id/stop_pump_pressure_et"
+                android:layout_width="@dimen/data"
+                android:layout_height="wrap_content"
+                android:text="@string/pressure"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginLeft="50dp"/>
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/stop_pump_pressure_unit"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/setting_margin">
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/cavitation_pressure"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+
+            <EditText
+                android:id="@+id/cavitation_pressure_et"
+                android:layout_width="@dimen/data"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@string/gas_pressure"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginLeft="50dp"/>
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/cavitation_pressure_unit"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/setting_margin">
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/max_liquid_level"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+
+            <EditText
+                android:id="@+id/max_liquid_level_et"
+                android:layout_width="@dimen/data"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@string/liquid_level"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginLeft="50dp"/>
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/max_liquid_level_unit"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/setting_margin">
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/max_tank_pressure"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+
+            <EditText
+                android:id="@+id/max_tank_pressure_et"
+                android:layout_width="@dimen/data"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@string/tank_pressure"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginLeft="50dp"/>
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/max_tank_pressure_unit"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/setting_margin">
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/stop_delay"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+
+            <EditText
+                android:id="@+id/delay_et"
+                android:layout_width="@dimen/data"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@string/delay"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginLeft="50dp"/>
+
+            <TextView
+                android:layout_width="@dimen/port"
+                android:layout_height="wrap_content"
+                android:text="@string/delay_unit"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/save_settings_bt"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:layout_width="600dp"
+                android:layout_height="100dp"
+                android:background="@color/button_bg_color"
+                android:textSize="@dimen/setting_text_size"
+                android:text="@string/save_label"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

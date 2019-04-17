@@ -20,4 +20,11 @@
     <dimen name="login_divede_line_margin">10dp</dimen>
     <dimen name="login_btn_margin_top">50dp</dimen>
     <dimen name="login_password_margin_top">10dp</dimen>
+    <dimen name="bottom_item_margin_top">10dp</dimen>
+    <dimen name="bottom_items_margin_top">5dp</dimen>
+    <dimen name="setting_Configuration_size">400dp</dimen>
+    <dimen name="setting_text_size">30sp</dimen>
+    <dimen name="port">200dp</dimen>
+    <dimen name="data">400dp</dimen>
+    <dimen name="setting_margin">10dp</dimen>
 </resources>

@@ -20,12 +20,12 @@ public class Config {
     public static int FRAME_HEADER_FEEDBACK;//帧头
     public static int COMMAND_WORD_FEEDBACK;//命令字
     public static int DATA_LENGTH_FEEDBACK;//数据长度
-    public static int PUMP_FRONT_FEEDBACK;//泵前压力
-    public static int PUMP_BEHIND_FEEDBACK;//泵后压力
-    public static int LEVEL_FEEDBACK;//液位
-    public static int FLOWMETER_TEMPERATURE_FEEDBACK;//流量计温度
-    public static int FLOWMETER_UNLOADING_QUANTITY_FEEDBACK;//流量计卸液量
-    public static int FLOWMETER_RATE_FEEDBACK;//流量计瞬时流量
+    public static double PUMP_FRONT_FEEDBACK;//泵前压力
+    public static double PUMP_BEHIND_FEEDBACK;//泵后压力
+    public static double LEVEL_FEEDBACK;//液位
+    public static double FLOWMETER_TEMPERATURE_FEEDBACK;//流量计温度
+    public static double FLOWMETER_UNLOADING_QUANTITY_FEEDBACK;//流量计卸液量
+    public static double FLOWMETER_RATE_FEEDBACK;//流量计瞬时流量
     public static int STATUS_FEEDBACK;//从机状态
     public static int FRAME_TAIL_FEEDBACK;//帧尾
 }

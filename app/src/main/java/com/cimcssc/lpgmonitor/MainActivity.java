@@ -3,6 +3,7 @@ package com.cimcssc.lpgmonitor;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.serial.SerialPort;
+import com.utils.CRC16;
 import com.utils.Config;
 import com.utils.SendBytes;
+import com.utils.TransferValue;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +40,14 @@ public class MainActivity extends BaseActivity {
     TextView action_Tv2;
     @BindView(R.id.textView9)
     TextView TextView9;
+    @BindView(R.id.settings_iv)
+    ImageView settings_Iv;
+    @BindView(R.id.pump_behind_pressure_tv)
+    TextView pump_behind_pressure_Tv;
+    @BindView(R.id.pump_front_pressure_tv)
+    TextView pump_front_pressure_Tv;
+    @BindView(R.id.level_tv)
+    TextView level_Tv;
 
     //byte类型最大只能存放127（对应ox7F）
     //private byte[] bytes =
@@ -49,6 +60,7 @@ public class MainActivity extends BaseActivity {
 
     private Context mContext = MainActivity.this;
     private String receiveData = "";
+    private boolean isCRCValid = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,21 +73,32 @@ public class MainActivity extends BaseActivity {
 
         //接收数据
         receiveData();
+
+//        byte[] myBytes = new byte[]{
+//                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//                0x00, 0x00, 0x00, 0x00, 0x01, 0x3B
+//        };
+//        int[] is = CRC16.getCrc16(myBytes);
     }
 
-    @OnClick({R.id.action_tv1,R.id.action_tv2})
+    @OnClick({R.id.action_tv1,R.id.action_tv2,R.id.settings_iv})
     public void onClick(View v){
         switch (v.getId()){
+            case R.id.settings_iv:
+                startActivity(new Intent(MainActivity.this,SettingActivity.class));
+                break;
             case R.id.action_tv1:
                 //发送数据 0x01 1（十进制）
                 //0x02 2（十进制）
                 //0x03 3（十进制）
 
+                sendData(1);//十进制
+
                 //卸液准备
                 if(action_Tv1.getText().equals(getResources().getString(R.string.unloading_ready_label))){
                         //action_Tv1.setText(getResources().getString(R.string.unloading_label));
                     //发送  卸液准备
-                    sendData(1);//十进制
+
 
                 }
                 //卸液
@@ -212,35 +235,95 @@ public class MainActivity extends BaseActivity {
                         s = sb.toString().trim();
                         if(s.startsWith("3C") && s.endsWith("3E")){
                             receiveData = sb.toString().trim();
+                            Log.d("receivedata","receive data is: " + receiveData);
+                            if(!receiveData.contains(" ")){
+                                receiveData = transferString(receiveData);
+                            }
                             sb = new StringBuffer();
                             runOnUiThread(new Runnable() {
                                 public void run() {
-                                    Log.d("receivedata","receive data is: " + receiveData);
-
                                     String[] strs = receiveData.split(" ");
 
                                     Config.FRAME_HEADER_FEEDBACK = Integer.parseInt(strs[0],16);
                                     Config.COMMAND_WORD_FEEDBACK = Integer.parseInt(strs[1],16);
                                     Config.DATA_LENGTH_FEEDBACK = Integer.parseInt(strs[2],16);
-                                    Config.PUMP_FRONT_FEEDBACK = Integer.parseInt(strs[3],16);
-                                    Config.PUMP_BEHIND_FEEDBACK = Integer.parseInt(strs[4],16);
-                                    Config.PUMP_BEHIND_FEEDBACK = Integer.parseInt(strs[5],16);
-                                    Config.LEVEL_FEEDBACK = Integer.parseInt(strs[0],16);
+                                    //泵前压力
+                                    Config.PUMP_FRONT_FEEDBACK =
+                                            TransferValue.getDoubleValue(strs[3],strs[4]);
+                                    //泵后压力
+                                    Config.PUMP_BEHIND_FEEDBACK =
+                                            TransferValue.getDoubleValue(strs[5],strs[6]);
+                                    //液位
+                                    Config.LEVEL_FEEDBACK = TransferValue.getDoubleValue(strs[7], strs[8]);
+                                    //流量计温度
+                                    Config.FLOWMETER_TEMPERATURE_FEEDBACK =
+                                            TransferValue.getDoubleValue(strs[9],strs[10]);
+                                    //流量计卸液量
+                                    Config.FLOWMETER_UNLOADING_QUANTITY_FEEDBACK =
+                                            TransferValue.getDoubleValue(strs[11],strs[12]);
+                                    //流量计瞬时流量
+                                    Config.FLOWMETER_RATE_FEEDBACK =
+                                            TransferValue.getDoubleValue(strs[13],strs[14]);
+
+                                    //从机状态
+                                    Config.STATUS_FEEDBACK = Integer.parseInt(strs[15],16);
+
+                                    //帧尾
+                                    Config.LEVEL_FEEDBACK = Integer.parseInt(strs[21],16);
 
 
-                                    byte[] bytes = new byte[]{
+                                    //开始数据校验
+                                    byte[] b = new byte[]{
+                                            (byte)Integer.parseInt(strs[3],16),
+                                            (byte)Integer.parseInt(strs[4],16),
 
+                                            (byte)Integer.parseInt(strs[5],16),
+                                            (byte)Integer.parseInt(strs[6],16),
+
+                                            (byte)Integer.parseInt(strs[7],16),
+                                            (byte)Integer.parseInt(strs[8],16),
+
+                                            (byte)Integer.parseInt(strs[9],16),
+                                            (byte)Integer.parseInt(strs[10],16),
+
+                                            (byte)Integer.parseInt(strs[11],16),
+                                            (byte)Integer.parseInt(strs[12],16),
+
+                                            (byte)Integer.parseInt(strs[13],16),
+                                            (byte)Integer.parseInt(strs[14],16),
+
+                                            (byte)Integer.parseInt(strs[15],16),
+
+                                            (byte)Integer.parseInt(strs[16],16),
+                                            (byte)Integer.parseInt(strs[17],16),
+                                            (byte)Integer.parseInt(strs[18],16)
                                     };
-                                    //卸液
-                                    if(receiveData.equals("2019")){
-                                        action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                                    int[] ints = CRC16.getCrc16(b);
+                                    //判断校验码是否正确
+                                    if(ints[0] == Integer.parseInt(strs[19],16) &&
+                                            ints[1] == Integer.parseInt(strs[20],16)){
+                                        isCRCValid = true;
+                                    }else{
+                                        isCRCValid = false;
                                     }
-                                    //卸液结束
-                                    else if(receiveData.equals("2020")){
-                                        action_Tv1.setVisibility(View.VISIBLE);
-                                        action_Tv2.setVisibility(View.VISIBLE);
-                                        action_Tv2.setText(getResources().getString(R.string.unloading_end_label));
-                                        action_Tv1.setText(getResources().getString(R.string.wait_on_label));
+
+                                    if(isCRCValid){
+                                        pump_behind_pressure_Tv.setText(Config.PUMP_BEHIND_FEEDBACK + "");
+                                        pump_front_pressure_Tv.setText(Config.PUMP_FRONT_FEEDBACK + "");
+                                        level_Tv.setText(Config.LEVEL_FEEDBACK + "");
+                                        //卸液
+                                        if(receiveData.equals("2019")){
+                                            action_Tv1.setText(getResources().getString(R.string.unloading_label));
+                                        }
+                                        //卸液结束
+                                        else if(receiveData.equals("2020")){
+                                            action_Tv1.setVisibility(View.VISIBLE);
+                                            action_Tv2.setVisibility(View.VISIBLE);
+                                            action_Tv2.setText(getResources().getString(R.string.unloading_end_label));
+                                            action_Tv1.setText(getResources().getString(R.string.wait_on_label));
+                                        }
+                                    }else{
+                                        //do nothing
                                     }
                                 }
                             });
@@ -251,6 +334,22 @@ public class MainActivity extends BaseActivity {
                 }
             }
         }).start();
+    }
+
+    //将String s每隔2个数字，就加一个空格
+    public String transferString(String s){
+        StringBuffer result = new StringBuffer();
+        int count = 0;
+        for(int k = 0; k <= s.length() - 1; k++){
+            result.append(s.charAt(k));
+            count++;
+            if(count % 2 == 0){
+                count = 0;
+                result.append(" ");
+            }
+        }
+
+        return result.toString();
     }
 
     @Override
