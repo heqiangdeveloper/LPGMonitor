@@ -27,4 +27,5 @@
     <dimen name="port">200dp</dimen>
     <dimen name="data">400dp</dimen>
     <dimen name="setting_margin">10dp</dimen>
+    <dimen name="setting_height">60dp</dimen>
 </resources>

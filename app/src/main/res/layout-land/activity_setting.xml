@@ -7,59 +7,61 @@
               android:orientation="vertical"
               tools:ignore="MissingDefaultResource">
 
-    <include layout="@layout/time_layout" />
-
     <include layout="@layout/title_layout" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/gateway_setting"
-            android:layout_width="@dimen/setting_Configuration_size"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gateway_parameter"
-            android:textSize="@dimen/setting_text_size"
-            android:background="@color/setting"
-            android:gravity="center"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/unloading_setting"
-            android:layout_width="@dimen/setting_Configuration_size"
-            android:layout_height="wrap_content"
-            android:text="@string/unloading_parameter"
-            android:textSize="@dimen/setting_text_size"
-            android:background="@color/setting"
-            android:gravity="center"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/gateway_setting"
+                android:layout_width="@dimen/setting_Configuration_size"
+                android:layout_height="@dimen/setting_height"
+                android:text="@string/gateway_parameter"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/downtime_setting"
-            android:layout_width="@dimen/setting_Configuration_size"
-            android:layout_height="wrap_content"
-            android:text="@string/downtime_parameter"
-            android:textSize="@dimen/setting_text_size"
-            android:background="@color/setting"
-            android:gravity="center"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/unloading_setting"
+                android:layout_width="@dimen/setting_Configuration_size"
+                android:layout_height="@dimen/setting_height"
+                android:text="@string/unloading_parameter"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"/>
 
-        <TextView
-            android:id="@+id/password_safety"
-            android:layout_width="@dimen/setting_Configuration_size"
-            android:layout_height="wrap_content"
-            android:text="@string/password_safety"
-            android:textSize="@dimen/setting_text_size"
-            android:background="@color/setting"
-            android:gravity="center"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/downtime_setting"
+                android:layout_width="@dimen/setting_Configuration_size"
+                android:layout_height="@dimen/setting_height"
+                android:text="@string/downtime_parameter"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/password_safety"
+                android:layout_width="@dimen/setting_Configuration_size"
+                android:layout_height="@dimen/setting_height"
+                android:text="@string/password_safety"
+                android:textSize="@dimen/setting_text_size"
+                android:background="@color/setting"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
