@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +63,7 @@ public class MainActivity extends BaseActivity {
     private Context mContext = MainActivity.this;
     private String receiveData = "";
     private boolean isCRCValid = false;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +84,14 @@ public class MainActivity extends BaseActivity {
 //        int[] is = CRC16.getCrc16(myBytes);
     }
 
-    @OnClick({R.id.action_tv1,R.id.action_tv2,R.id.settings_iv})
+    @OnClick({R.id.action_tv1,R.id.action_tv2,R.id.settings_iv,R.id.textView9})
     public void onClick(View v){
         switch (v.getId()){
+            case R.id.textView9:
+                if(mediaPlayer != null && mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
+                break;
             case R.id.settings_iv:
                 startActivity(new Intent(MainActivity.this,SettingActivity.class));
                 break;
@@ -311,6 +319,10 @@ public class MainActivity extends BaseActivity {
                                         pump_behind_pressure_Tv.setText(Config.PUMP_BEHIND_FEEDBACK + "");
                                         pump_front_pressure_Tv.setText(Config.PUMP_FRONT_FEEDBACK + "");
                                         level_Tv.setText(Config.LEVEL_FEEDBACK + "");
+
+                                        initMediaPlayer();
+                                        mediaPlayer.start();
+
                                         //卸液
                                         if(receiveData.equals("2019")){
                                             action_Tv1.setText(getResources().getString(R.string.unloading_label));
@@ -350,6 +362,15 @@ public class MainActivity extends BaseActivity {
         }
 
         return result.toString();
+    }
+
+    public void initMediaPlayer(){
+        try{
+            mediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.alarm);
+            //mediaPlayer.start();
+        }catch (Exception e){
+
+        }
     }
 
     @Override
