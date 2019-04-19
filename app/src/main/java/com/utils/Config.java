@@ -6,8 +6,15 @@ package com.utils;
 public class Config {
     //串口文件路径
     public static String pathname = "/dev/ttyS2";
+
+    //usb串口文件路径
+    public static String usb_pathname = "/dev/ttyUSB10";
+
     //波特率
     public static int baudrate = 115200;
+
+    //波特率
+    public static int usb_baudrate = 9600;
 
     //主机发送命令
     public static byte FRAME_HEADER_SEND = 0x3C;//帧头
@@ -27,5 +34,10 @@ public class Config {
     public static double FLOWMETER_UNLOADING_QUANTITY_FEEDBACK;//流量计卸液量
     public static double FLOWMETER_RATE_FEEDBACK;//流量计瞬时流量
     public static int STATUS_FEEDBACK;//从机状态
+    public static int DEVICE_STATUS_FEEDBACK1;//设备状态1
+    public static int DEVICE_STATUS_FEEDBACK2;//设备状2
+    public static int DEVICE_STATUS_FEEDBACK3;//设备状态3
+    public static int CRC_FEEDBACK1;//数据校验1
+    public static int CRC_FEEDBACK2;//数据校验2
     public static int FRAME_TAIL_FEEDBACK;//帧尾
 }

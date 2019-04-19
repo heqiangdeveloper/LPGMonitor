@@ -11,4 +11,18 @@ public class TransferValue {
         double d = ((i1 << 8) | i2)/100.0;
         return d;
     }
+
+    public static String getDoubleValue(String value){
+        String s = "";
+        StringBuffer sb = new StringBuffer();
+        if(value.length() == 8){
+            s = value;
+        }else{
+            while (value.length() < 8){
+
+            }
+        }
+        return s;
+    }
+
 }

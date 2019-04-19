@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.CountDownTimer;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,8 +55,11 @@ public class MainActivity extends BaseActivity {
     //private byte[] bytes =
     //        new byte[]{0x3C,0x30,0x1C,0x07,0x02,0x05,0x3E,0x7F};
     private SerialPort serialttyS1;
+    private SerialPort serialttyUSB3;
     private InputStream ttyS1InputStream;
     private OutputStream ttyS1OutputStream;
+    private InputStream ttyUSB3InputStream;
+    private OutputStream ttyUSB3OutputStream;
     String readDatas = null;
     StringBuffer sb = new StringBuffer();
 
@@ -72,25 +75,39 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         //初始化串口
-        init_serial();
+        init_serial(Config.pathname,Config.baudrate);
+
+        //初始化usb串口
+        init_usb_serial(Config.usb_pathname,Config.usb_baudrate);
 
         //接收数据
         receiveData();
 
-//        byte[] myBytes = new byte[]{
-//                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//                0x00, 0x00, 0x00, 0x00, 0x01, 0x3B
-//        };
-//        int[] is = CRC16.getCrc16(myBytes);
+        //初始化MediaPlayer
+        initMediaPlayer();
+
+        //01 1C 00 09 01 05 01 00 01 01 00 10 00 09 01 3B
+        byte[] myBytes = new byte[]{
+                0x01, 0x1C, 0x00, 0x09, 0x01, 0x05, 0x01, 0x00, 0x01, 0x01,
+                0x00, 0x10, 0x00, 0x09, 0x01, 0x3B
+        };
+        int[] is = CRC16.getCrc16(myBytes);
     }
 
     @OnClick({R.id.action_tv1,R.id.action_tv2,R.id.settings_iv,R.id.textView9})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.textView9:
-                if(mediaPlayer != null && mediaPlayer.isPlaying()){
+                /*if(mediaPlayer != null && mediaPlayer.isPlaying()){
                     mediaPlayer.stop();
-                }
+                }*/
+
+                //USBPrinter printer = USBPrinter.getInstance();
+                //printer.initPrinter(MainActivity.this);
+                //printer.print("Hello World!");
+
+                sendUSBData();
+
                 break;
             case R.id.settings_iv:
                 startActivity(new Intent(MainActivity.this,SettingActivity.class));
@@ -190,13 +207,25 @@ public class MainActivity extends BaseActivity {
         }
     }
     /* 打开串口 */
-    private void init_serial(){
+    private void init_serial(String path,int baudrate){
         try {
             Log.d("mylog","send a  data...");
-            serialttyS1 = new SerialPort(new File(Config.pathname),Config.baudrate,0);
+            serialttyS1 = new SerialPort(new File(path),baudrate,0);
             ttyS1InputStream = serialttyS1.getInputStream();
             ttyS1OutputStream = serialttyS1.getOutputStream();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 打开usb串口 */
+    private void init_usb_serial(String path,int baudrate){
+        try {
+            Log.d("mylog","send a  data...");
+            serialttyUSB3 = new SerialPort(new File(path),baudrate,0);
+            ttyUSB3InputStream = serialttyUSB3.getInputStream();
+            ttyUSB3OutputStream = serialttyUSB3.getOutputStream();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -228,6 +257,43 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    //倒计时
+    private void startCountDownTime(final long time) {
+        final CountDownTimer timer = new CountDownTimer(time * 1000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                /*if(isSpeaked){//客户端已经讲完话、
+                    timeTv.setText("");
+                    this.onFinish();
+                }else {
+                    timeTv.setText((millisUntilFinished / 1000) + "s");
+                }*/
+            }
+
+            @Override
+            public void onFinish() {
+                //timeTv.setText("");
+            }
+        };
+        timer.start();
+    }
+
+    //发送打印数据
+    public void sendUSBData(){
+        /* 串口发送字节 */
+        if(ttyUSB3OutputStream != null){
+            String s = "hello world!";
+
+            //byte[] sendCommandBytes = new byte[]{0x0A,0x30,0x01,0x02};
+            try{
+                ttyUSB3OutputStream.write(s.getBytes());
+            }catch (Exception e){
+
+            }
+        }
+    }
+
     public void receiveData() {
         new Thread(new Runnable() {
             @Override
@@ -236,6 +302,7 @@ public class MainActivity extends BaseActivity {
                 int size;
                 byte[] buffer = new byte[1024];
                 String s = "";
+                int[] ints;
                 try{
                     while (ttyS1InputStream != null && (size = ttyS1InputStream.read(buffer)) > 0) {
                         sb.append(new String(buffer,0,size));
@@ -276,9 +343,17 @@ public class MainActivity extends BaseActivity {
                                     //从机状态
                                     Config.STATUS_FEEDBACK = Integer.parseInt(strs[15],16);
 
+                                    //设备状态
+                                    Config.DEVICE_STATUS_FEEDBACK1 = Integer.parseInt(strs[16],16);
+                                    Config.DEVICE_STATUS_FEEDBACK2 = Integer.parseInt(strs[17],16);
+                                    Config.DEVICE_STATUS_FEEDBACK3 = Integer.parseInt(strs[18],16);
+
+                                    //数据校验
+                                    Config.CRC_FEEDBACK1 = Integer.parseInt(strs[19],16);
+                                    Config.CRC_FEEDBACK2 = Integer.parseInt(strs[20],16);
+
                                     //帧尾
                                     Config.LEVEL_FEEDBACK = Integer.parseInt(strs[21],16);
-
 
                                     //开始数据校验
                                     byte[] b = new byte[]{
@@ -308,8 +383,7 @@ public class MainActivity extends BaseActivity {
                                     };
                                     int[] ints = CRC16.getCrc16(b);
                                     //判断校验码是否正确
-                                    if(ints[0] == Integer.parseInt(strs[19],16) &&
-                                            ints[1] == Integer.parseInt(strs[20],16)){
+                                    if(ints[0] == Config.CRC_FEEDBACK1 && ints[1] == Config.CRC_FEEDBACK2){
                                         isCRCValid = true;
                                     }else{
                                         isCRCValid = false;
@@ -320,8 +394,20 @@ public class MainActivity extends BaseActivity {
                                         pump_front_pressure_Tv.setText(Config.PUMP_FRONT_FEEDBACK + "");
                                         level_Tv.setText(Config.LEVEL_FEEDBACK + "");
 
-                                        initMediaPlayer();
-                                        mediaPlayer.start();
+                                        //设备状态
+                                        //
+                                        String status1 =
+                                                Integer.toBinaryString(Config.DEVICE_STATUS_FEEDBACK1);
+                                        String status2 =
+                                                Integer.toBinaryString(Config.DEVICE_STATUS_FEEDBACK2);
+                                        String status3 =
+                                                Integer.toBinaryString(Config.DEVICE_STATUS_FEEDBACK3);
+
+
+                                        //报警
+                                        if(mediaPlayer != null){
+                                            //mediaPlayer.start();
+                                        }
 
                                         //卸液
                                         if(receiveData.equals("2019")){
