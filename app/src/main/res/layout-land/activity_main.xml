@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical"
-    android:padding="8dp"
-    tools:ignore="MissingDefaultResource">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical"
+              android:padding="8dp"
+              tools:ignore="MissingDefaultResource">
 
     <include layout="@layout/time_layout" />
 
@@ -123,354 +123,421 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="流量统计"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:id="@+id/flow_layout"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/print_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/bg"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="流量统计"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/flow_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp">
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@id/view01"
-                            android:text="时间" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp">
 
-                        <View
-                            android:id="@+id/view01"
-                            android:layout_width="2dp"
-                            android:layout_height="16dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@color/dividerBg" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@id/view01"
+                                android:text="时间" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/view01"
-                            android:text="2019-01-19 20:00:00"
-                            android:textColor="@color/grassGreen" />
-                    </RelativeLayout>
+                            <View
+                                android:id="@+id/view01"
+                                android:layout_width="2dp"
+                                android:layout_height="16dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:background="@color/dividerBg" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/view01"
+                                android:text="2019-01-19 20:00:00"
+                                android:textColor="@color/grassGreen" />
+                        </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@id/view02"
-                            android:text="流速" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp">
 
-                        <View
-                            android:id="@+id/view02"
-                            android:layout_width="2dp"
-                            android:layout_height="16dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@color/dividerBg" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@id/view02"
+                                android:text="流速" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/view02"
-                            android:text="9.00kg/min"
-                            android:textColor="@color/seaBlue" />
-                    </RelativeLayout>
+                            <View
+                                android:id="@+id/view02"
+                                android:layout_width="2dp"
+                                android:layout_height="16dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:background="@color/dividerBg" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/view02"
+                                android:text="9.00kg/min"
+                                android:textColor="@color/seaBlue" />
+                        </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@id/view03"
-                            android:text="密度" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp">
 
-                        <View
-                            android:id="@+id/view03"
-                            android:layout_width="2dp"
-                            android:layout_height="16dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@color/dividerBg" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@id/view03"
+                                android:text="密度" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/view03"
-                            android:text="900.00kg/L"
-                            android:textColor="@color/purple" />
-                    </RelativeLayout>
+                            <View
+                                android:id="@+id/view03"
+                                android:layout_width="2dp"
+                                android:layout_height="16dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:background="@color/dividerBg" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/view03"
+                                android:text="900.00kg/L"
+                                android:textColor="@color/purple" />
+                        </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@id/view04"
-                            android:text="温度" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp">
 
-                        <View
-                            android:id="@+id/view04"
-                            android:layout_width="2dp"
-                            android:layout_height="16dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@color/dividerBg" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@id/view04"
+                                android:text="温度" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/view04"
-                            android:text="28℃"
-                            android:textColor="@color/pink" />
-                    </RelativeLayout>
+                            <View
+                                android:id="@+id/view04"
+                                android:layout_width="2dp"
+                                android:layout_height="16dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:background="@color/dividerBg" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/view04"
+                                android:text="28℃"
+                                android:textColor="@color/pink" />
+                        </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@id/view05"
-                            android:text="最新卸货量" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp">
 
-                        <View
-                            android:id="@+id/view05"
-                            android:layout_width="2dp"
-                            android:layout_height="16dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:background="@color/dividerBg" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@id/view05"
+                                android:text="最新卸货量" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/view05"
-                            android:text="78.21kg"
-                            android:textColor="@color/lightBrown" />
-                    </RelativeLayout>
-                </LinearLayout>
+                            <View
+                                android:id="@+id/view05"
+                                android:layout_width="2dp"
+                                android:layout_height="16dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:background="@color/dividerBg" />
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/flow_layout"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
-                    android:background="@mipmap/print_small"
-                    android:gravity="center"
-                    android:text="打印" />
-            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/view05"
+                                android:text="78.21kg"
+                                android:textColor="@color/lightBrown" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/print_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/flow_layout"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:background="@mipmap/print_small"
+                        android:gravity="center"
+                        android:text="@string/print_label" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/stop_alarm_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <Button
+                        android:id="@+id/stop_alarm_bt"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:text="点击消警"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:background="#FFC107"
+                        android:textSize="35sp"
+                        android:textColor="#1B0707"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+            </FrameLayout>
+
 
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
+            android:layout_weight="1">
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/pressure_ll"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/pump_imgae_size"
-                        android:layout_height="@dimen/pump_imgae_size"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/dial" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_width="@dimen/pump_imgae_size"
-                        android:layout_height="@dimen/pump_imgae_size"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/pointer" />
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="@dimen/pump_imgae_size"
+                            android:layout_height="@dimen/pump_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/dial" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:layout_marginTop="@dimen/bottom_item_margin_top"
-                    android:text="@string/pump_pressure" />
-
-                <TextView
-                    android:id="@+id/pump_behind_pressure_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:layout_marginTop="@dimen/bottom_items_margin_top"
-                    android:text="0.0" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="@dimen/pump_imgae_size"
-                        android:layout_height="@dimen/pump_imgae_size"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/dial" />
-
-                    <ImageView
-                        android:layout_width="@dimen/pump_imgae_size"
-                        android:layout_height="@dimen/pump_imgae_size"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/pointer" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/bottom_item_margin_top"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:text="@string/port_pressure" />
-
-                <TextView
-                    android:id="@+id/pump_front_pressure_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:layout_marginTop="@dimen/bottom_items_margin_top"
-                    android:text="0.0" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="@dimen/pump_imgae_size"
-                        android:layout_height="@dimen/pump_imgae_size"
-                        android:src="@mipmap/tank" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/bottom_item_margin_top"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:text="@string/port_level" />
-
-                <TextView
-                    android:id="@+id/level_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:layout_marginTop="@dimen/bottom_items_margin_top"
-                    android:text="0.0" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/fire_iv"
-                        android:layout_width="@dimen/pump_imgae_size"
-                        android:layout_height="@dimen/pump_imgae_size"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/circle" />
+                        <ImageView
+                            android:layout_width="@dimen/pump_imgae_size"
+                            android:layout_height="@dimen/pump_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/pointer" />
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/fire_iv"
-                        android:layout_centerInParent="true"
-                        android:text="10%"
-                        android:textColor="@color/white"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                        android:textSize="@dimen/bottom_text_size"
+                        android:layout_marginTop="@dimen/bottom_item_margin_top"
+                        android:text="@string/pump_pressure" />
+
+                    <TextView
+                        android:id="@+id/pump_behind_pressure_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/bottom_text_size"
+                        android:layout_marginTop="@dimen/bottom_items_margin_top"
+                        android:text="0.0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/pump_imgae_size"
+                            android:layout_height="@dimen/pump_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/dial" />
+
+                        <ImageView
+                            android:layout_width="@dimen/pump_imgae_size"
+                            android:layout_height="@dimen/pump_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/pointer" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/bottom_item_margin_top"
+                        android:textSize="@dimen/bottom_text_size"
+                        android:text="@string/port_pressure" />
+
+                    <TextView
+                        android:id="@+id/pump_front_pressure_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/bottom_text_size"
+                        android:layout_marginTop="@dimen/bottom_items_margin_top"
+                        android:text="0.0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/pump_imgae_size"
+                            android:layout_height="@dimen/pump_imgae_size"
+                            android:src="@mipmap/tank" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/bottom_item_margin_top"
+                        android:textSize="@dimen/bottom_text_size"
+                        android:text="@string/port_level" />
+
+                    <TextView
+                        android:id="@+id/level_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/bottom_text_size"
+                        android:layout_marginTop="@dimen/bottom_items_margin_top"
+                        android:text="0.0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/fire_iv"
+                            android:layout_width="@dimen/pump_imgae_size"
+                            android:layout_height="@dimen/pump_imgae_size"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/circle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/fire_iv"
+                            android:layout_centerInParent="true"
+                            android:text="10%"
+                            android:textColor="@color/white"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textSize="@dimen/bottom_text_size"
+                        android:text="@string/gas_level" />
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/alarm_rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                android:background="#FC0303"
+                android:layout_gravity="center">
 
                 <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/alarm_list"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textSize="@dimen/bottom_text_size"
-                    android:text="@string/gas_level" />
-            </LinearLayout>
-        </LinearLayout>
+                    android:text="报警项列表"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:layout_margin="5dp"/>
+
+                <ScrollView
+                    android:layout_below="@id/alarm_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/alarm_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:text="1.燃气浓度90%，超过上限：60%"
+                        android:textSize="23sp"
+                        android:layout_margin="5dp"/>
+
+
+                </ScrollView>
+
+            </RelativeLayout>
+        </FrameLayout>
+
     </LinearLayout>
 </LinearLayout>
